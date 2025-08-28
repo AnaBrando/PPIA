@@ -28,8 +28,9 @@ builder.add_conditional_edges("ClassifyIntent", lambda x: x["intent"], {
     "test": "GenerateTests",
 })
 
-# Output back to user
-for node in ["GenerateCode", "ExplainCode", "GenerateTests"]:
-    builder.add_edge(node, "ClassifyIntent")
+
+builder.set_finish_point("GenerateCode")
+builder.set_finish_point("ExplainCode")
+builder.set_finish_point("GenerateTests")
 
 graph = builder.compile()
